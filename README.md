@@ -1,16 +1,10 @@
 ACM Fall 2021 Research Coding Challenge
 
-For this challenge I calculated the overall sentiment score of the input text. 
-
-The library I used was vaderSentiment. This library has a large dataset that is already included. When you run a sentence through the analyzer it returns a dictionary that contains four keys. Those keys are, positive, neutral, negative, and compound. The compound key is what is used to determine the overall sentiment of the sentence. A compound score greater than or equal to .05 can be considered a positive sentiment. Less than or equal to -.05 is negative and in between is neutral.
-
-The program reads the input file one line at a time and passes that line into the analyzer. A dictionary with the four keys is produced and the compound score is compared to the scoring mentioned above. Depending on that score, either the positive score, negative score, or neutral score is incremented by one.
-
-A total count is also maintaned. Once every line has been read it calculates the total percentage of positive, negative and neutral scores. The highest of the three is the overall sentiment of the text. I also store the individual line scores in a seperate file.
-
-The final score for this text was a postive sentiment at 48%. The negative score ended at roughly 27%. And the neutral score ended up at 24% This means that overall the sentiment of the text was positive. This was kind of surprising to me given the the first paragraph. 
-
-Need to run pip install vadersentiment to install the required libraries.
+For this challenge, I calculated the overall sentiment score of the input text. To facilitate analysis, I edited the input.txt file so that each line is a sentence. I originally planned to replace the question mark and exclamation mark with a period and get rid of it. However, as will be explained later, they are too important. 
+ 
+I used vaderSentiment. This library has a large data set already included. When you pass a sentence through the parser, it returns a dictionary with four keys. These keys are positive, neutral, negative and compound. Compound keys are used to determine the overall feeling of the sentence. A composite score greater than or equal to 0.05 can be considered a positive emotion. Less than or equal to 0.05 is negative and between the two it is neutral. 
+ 
+My program reads the input file one line at a time and passes that line to the parser. Generate a dictionary with four keys and compare the composite punctuation with the previous punctuation. Based on the score, a positive score, a negative score, or a neutral score is increased by one. Also save the total. After reading all the lines, calculate the total percentage of positive, negative, and neutral scores. The highest of the three is the overall mood of the text. I also save the scores for each row in a separate file. 
 
 The Resource I used - Simplifying Sentiment Analysis using VADER in Python 
 https://medium.com/analytics-vidhya/simplifying-social-media-sentiment-analysis-using-vader-in-python-f9e6ec6fc52f
