@@ -1,32 +1,24 @@
-# ACM Research Coding Challenge (Fall 2021)
+This program creates a sentiment score for a body of text stored in a dataset and returns the score both to the user as a percentile.
 
-## [](https://github.com/ACM-Research/Coding-Challenge-F21#no-collaboration-policy)No Collaboration Policy
+The program scores the text in three different ways:
 
-**You may not collaborate with anyone on this challenge.**  You  _are_  allowed to use Internet documentation. If you  _do_  use existing code (either from Github, Stack Overflow, or other sources),  **please cite your sources in the README**.
+As it is presented in the dataset as one big body of text
+As one big body of text with stop words removed
+Each sentence individually
+Libraries:
+Natural Language Toolkit
+Matplotlib
 
-## [](https://github.com/ACM-Research/Coding-Challenge-F21#submission-procedure)Submission Procedure
+How it Works & Results:
+The program first reads in the input data and formats and stores it in three ways:
 
-Please follow the below instructions on how to submit your answers.
+As a raw string
+As a string without stop words, this is done by pulling a dictionary of stop words from the Natural Language Toolkit data library and comparing this to the input string as a list of words to remove all matches.
+As a list of sentences, this is done by using PunktSentenceTokenizer which runs an unsupervised algorithm to detect and seperate sentences. In many cases you can't just split the data along periods since in many cases including this one there may be instances where periods don't denote the end of a sentence ("Dr., Mr., etc") so a tokenizer is required.
+The actual calculation of sentiment score is done using nltk's VADER(Valence Aware Dictionary for Sentiment Reasoning) model.
+Vader uses heuristics such as punctutation, capitlization, impact sentiment, negation, and conjunctions to calculate the tone and sentiment of text.
 
-1.  Create a  **public**  fork of this repo and name it  `ACM-Research-Coding-Challenge-F21`. To fork this repo, click the button on the top right and click the "Fork" button.
+Four doubles are returned as the sentiment score for the data. The first three are the negative, neutral, and positive numbers.
+These all add up to 1 and can be displayed as a percentage graphically.
 
-2.  Clone the fork of the repo to your computer using  `git clone [the URL of your clone]`. You may need to install Git for this (Google it).
-
-3.  Complete the Challenge based on the instructions below.
-
-4.  Submit your solution by filling out this [form](https://acmutd.typeform.com/to/zF1IcBGR).
-
-## Assessment Criteria 
-
-Submissions will be evaluated holistically and based on a combination of effort, validity of approach, analysis, adherence to the prompt, use of outside resources (encouraged), promptness of your submission, and other factors. Your approach and explanation (detailed below) is the most weighted criteria, and partial solutions are accepted. 
-
-## [](https://github.com/ACM-Research/Coding-Challenge-S21#question-one)Question One
-
-[Sentiment analysis](https://en.wikipedia.org/wiki/Sentiment_analysis) is a natural language processing technique that computes a sentiment score for a body of text. This sentiment score can quantify how positive, negative, or neutral the text is. The following dataset in  `input.txt`  contains a relatively large body of text.
-
-**Determine an overall sentiment score of the text in this file, explain what this score means, and contrast this score with what you expected.**  If your solution also provides different metrics about the text (magnitude, individual sentence score, etc.), feel free to add it to your explanation.   
-
-**You may use any programming language you feel most comfortable. We recommend Python because it is the easiest to implement. You're allowed to use any library/API you want to implement this**, just document which ones you used in this README file. Try to complete this as soon as possible as submissions are evaluated on a rolling basis.
-
-Regardless if you can or cannot answer the question, provide a short explanation of how you got your solution or how you think it can be solved in your README.md file. However, we highly recommend giving the challenge a try, you just might learn something new!
-
+The fourth metric is the compound score which is the aggregated score. This is calculated by summing the valence score(positive, negative, and neutral scores) for each word and the normalizing it between -1 and 1. The higher a compound score the more positive the text is overall.
