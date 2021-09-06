@@ -24,7 +24,7 @@ with open("input.txt","r") as f:
     f.close()
 
 #Writes individual scores to file. 
-with open("sentenceSentiment.txt", "w") as g:
+with open("Sentiment.txt", "w") as g:
     for sentence in sentences:
         g.write("%s\n" % sentence)
     g.close()
