@@ -1,24 +1,17 @@
-This program creates a sentiment score for a body of text stored in a dataset and returns the score both to the user as a percentile.
+ACM Research Challenge
 
-The program scores the text in three different ways:
+For this challenge I calculated the overall sentiment score of the input text. To make it easier to parse I edited the input.txt file so that each line was a sentence. I was originally going to replace the questions marks and exclamation marks with periods and split off of that. However, as will be discuessed later they were too important.
 
-As it is presented in the dataset as one big body of text
-As one big body of text with stop words removed
-Each sentence individually
-Libraries:
-Natural Language Toolkit
-Matplotlib
+The library I used was vaderSentiment. This library has a large dataset that is already included. When you run a sentence through the analyzer it returns a dictionary that contains four keys. Those keys are, positive, neutral, negative, and compound. The compound key is what is used to determine the overall sentiment of the sentence. A compound score greater than or equal to .05 can be considered a positive sentiment. Less than or equal to -.05 is negative and in between is neutral.
 
-How it Works & Results:
-The program first reads in the input data and formats and stores it in three ways:
+My program reads the input file one line at a time and passes that line into the analyzer. A dictionary with the four keys is produced and the compound score is compared to the scoring mentioned above. Depending on that score, either the positive score, negative score, or neutral score is incremented by one. A total count is also maintaned. Once every line has been read it calculates the total percentage of positive, negative and neutral scores. The highest of the three is the overall sentiment of the text. I also store the individual line scores in a seperate file.
 
-As a raw string
-As a string without stop words, this is done by pulling a dictionary of stop words from the Natural Language Toolkit data library and comparing this to the input string as a list of words to remove all matches.
-As a list of sentences, this is done by using PunktSentenceTokenizer which runs an unsupervised algorithm to detect and seperate sentences. In many cases you can't just split the data along periods since in many cases including this one there may be instances where periods don't denote the end of a sentence ("Dr., Mr., etc") so a tokenizer is required.
-The actual calculation of sentiment score is done using nltk's VADER(Valence Aware Dictionary for Sentiment Reasoning) model.
-Vader uses heuristics such as punctutation, capitlization, impact sentiment, negation, and conjunctions to calculate the tone and sentiment of text.
+The final score for this text was a postive sentiment at 48.28%. The negative score ended at roughly 27.59%. And the neutral score ended up at 24.13% This means that overall the sentiment of the text was positive. This was kind of surprising to me given the the first paragraph. I expected it to be pretty neutral in all.
 
-Four doubles are returned as the sentiment score for the data. The first three are the negative, neutral, and positive numbers.
-These all add up to 1 and can be displayed as a percentage graphically.
+Need to run pip install vadersentiment to install the required libraries.
 
-The fourth metric is the compound score which is the aggregated score. This is calculated by summing the valence score(positive, negative, and neutral scores) for each word and the normalizing it between -1 and 1. The higher a compound score the more positive the text is overall.
+Resources: Simplifying Sentiment Analysis using VADER in Python (on Social Media Text)
+https://medium.com/analytics-vidhya/simplifying-social-media-sentiment-analysis-using-vader-in-python-f9e6ec6fc52f
+
+Sentiment Analysis in Python with TextBlob and VADER Sentiment (also Dash p.6)
+https://www.youtube.com/watch?v=qTyj2R-wcks
